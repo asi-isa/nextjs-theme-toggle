@@ -1,24 +1,28 @@
 import COLORS from "../../constants/COLORS";
-import ThemeType from "../../types/ThemeType";
 import getCurrentTheme from "./getCurrentTheme";
+
+const cssify = (str: string): string => {
+  let cssifyString = "--";
+  for (const char of str) {
+    if (char == char.toUpperCase()) {
+      cssifyString += "-" + char.toLowerCase();
+    } else {
+      cssifyString += char;
+    }
+  }
+  return cssifyString;
+};
 
 export default () => {
   const root = window.document.documentElement;
 
   const currentTheme = getCurrentTheme();
 
-  root.style.setProperty(
-    "--color",
-    currentTheme === "light" ? COLORS.dark.color : COLORS.light.color
-  );
+  const notCurrentTheme = currentTheme === "light" ? "dark" : "light";
 
-  root.style.setProperty(
-    "--background",
-    currentTheme === "light" ? COLORS.dark.background : COLORS.light.background
-  );
+  for (const [key, color] of Object.entries(COLORS[notCurrentTheme])) {
+    root.style.setProperty(cssify(key), color);
+  }
 
-  root.style.setProperty(
-    "--current-theme",
-    currentTheme === "light" ? "dark" : "light"
-  );
+  root.style.setProperty("--current-theme", notCurrentTheme);
 };
