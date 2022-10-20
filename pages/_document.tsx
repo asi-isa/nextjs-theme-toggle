@@ -10,13 +10,9 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <Script
-          id="initial-color-theme"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: setInitialColorTheme,
-          }}
-        />
+        <Script id="initial-color-theme" strategy="beforeInteractive">
+          {setInitialColorTheme}
+        </Script>
       </body>
     </Html>
   );
