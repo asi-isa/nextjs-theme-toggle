@@ -1,4 +1,4 @@
-import switchTheme from "../utils/theme/switchTheme";
+import { switchTheme } from "../theme/client";
 
 const ThemeSwitcher = () => {
   return (

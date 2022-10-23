@@ -1,4 +1,6 @@
-export default {
+// Theme constants and types
+
+export const COLORS = {
   light: {
     color: "black",
     colorMuted: "gray",
@@ -18,3 +20,13 @@ export default {
     background: "#F5F1DA",
   },
 };
+
+export type Theme = keyof typeof COLORS;
+
+export const Themes: Theme[] = Object.keys(COLORS)
+  .sort()
+  .map((c) => c as Theme);
+
+export const NUM_THEMES = Themes.length;
+
+export const DEFAULT_THEME: Theme = "light";

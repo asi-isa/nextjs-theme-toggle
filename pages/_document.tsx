@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
 
-import setInitialColorTheme from "../utils/theme/setInitialColorTheme";
+import setInitialColorTheme from "../theme";
 
 export default function Document() {
   return (
