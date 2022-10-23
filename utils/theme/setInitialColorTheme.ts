@@ -44,7 +44,7 @@ function setInitialColorTheme(colors: typeof COLORS, defaultTheme: ThemeType) {
 
   const initialTheme = getInitialColorTheme(defaultTheme);
 
-  // setInitialColorTheme
+  // set initial color theme to the root element
   const root = window.document.documentElement;
 
   for (const [key, color] of Object.entries(colors[initialTheme])) {
@@ -55,8 +55,5 @@ function setInitialColorTheme(colors: typeof COLORS, defaultTheme: ThemeType) {
 }
 
 export default `
-(${setInitialColorTheme}(
-    ${JSON.stringify(COLORS)},
-    "${DEFAULT_THEME}"
-  )
-)`;
+(${setInitialColorTheme}(${JSON.stringify(COLORS)},"${DEFAULT_THEME}"))
+`;

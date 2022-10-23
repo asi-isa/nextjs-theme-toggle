@@ -1,5 +1,5 @@
 import COLORS from "../../constants/COLORS";
-import { getOppositeTheme } from "./getTheme";
+import { getNextTheme, getOppositeTheme } from "./getTheme";
 
 const cssify = (str: string): string => {
   let cssifyString = "--";
@@ -16,13 +16,16 @@ const cssify = (str: string): string => {
 export default () => {
   const root = window.document.documentElement;
 
-  const oppositeTheme = getOppositeTheme();
+  // const oppositeTheme = getOppositeTheme();
 
-  for (const [key, color] of Object.entries(COLORS[oppositeTheme])) {
+  const nextTheme = getNextTheme();
+  console.log("nextTheme", nextTheme);
+
+  for (const [key, color] of Object.entries(COLORS[nextTheme])) {
     root.style.setProperty(cssify(key), color);
   }
 
-  root.style.setProperty("--current-theme", oppositeTheme);
+  root.style.setProperty("--current-theme", nextTheme);
 
-  window.localStorage.setItem("color-mode", oppositeTheme);
+  window.localStorage.setItem("color-mode", nextTheme);
 };
