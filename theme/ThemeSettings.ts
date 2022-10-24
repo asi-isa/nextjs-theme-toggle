@@ -25,7 +25,7 @@ export type Theme = keyof typeof COLORS;
 
 export const Themes: Theme[] = Object.keys(COLORS)
   .sort()
-  .map((c) => c as Theme);
+  .map((theme) => theme as Theme);
 
 export const NUM_THEMES = Themes.length;
 

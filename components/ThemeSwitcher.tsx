@@ -1,4 +1,4 @@
-import { switchTheme } from "../theme/client";
+import { switchTheme } from "../theme";
 
 const ThemeSwitcher = () => {
   return (

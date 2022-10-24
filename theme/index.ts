@@ -1,4 +1,10 @@
-import { Theme, COLORS, DEFAULT_THEME } from "./ThemeSettings";
+import {
+  Theme,
+  COLORS,
+  DEFAULT_THEME,
+  NUM_THEMES,
+  Themes,
+} from "./ThemeSettings";
 
 // util functions
 /**
@@ -40,7 +46,7 @@ function getInitialColorTheme(defaultTheme: Theme) {
 /**
  * sets css values and local storage to match the current theme
  */
-export function setTheme(colors: typeof COLORS, theme: Theme) {
+function setTheme(colors: typeof COLORS, theme: Theme) {
   const root = window.document.documentElement;
 
   for (const [key, color] of Object.entries(colors[theme])) {
@@ -52,6 +58,28 @@ export function setTheme(colors: typeof COLORS, theme: Theme) {
   window.localStorage.setItem("color-mode", theme);
 }
 
+export const getCurrentTheme = () => {
+  const root = window.document.documentElement;
+
+  return window
+    .getComputedStyle(root, ":root")
+    .getPropertyValue("--current-theme") as Theme;
+};
+
+const getNextTheme = () => {
+  const currentTheme = getCurrentTheme();
+
+  const nextThemeIdx = (Themes.indexOf(currentTheme) + 1) % NUM_THEMES;
+
+  return Themes[nextThemeIdx] as Theme;
+};
+
+export const switchTheme = () => {
+  const nextTheme = getNextTheme();
+
+  setTheme(COLORS, nextTheme);
+};
+
 // main script
 function setInitialColorTheme_(defaultTheme: Theme, colors: typeof COLORS) {
   const initialTheme = getInitialColorTheme(defaultTheme);
@@ -59,7 +87,6 @@ function setInitialColorTheme_(defaultTheme: Theme, colors: typeof COLORS) {
   setTheme(colors, initialTheme);
 }
 
-// main script
 const setInitialColorTheme = `
   // 'import' util functions
   ${cssify}
